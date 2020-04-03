@@ -12,7 +12,8 @@ import java.util.Map;
 /**
  * @ClassName:SecondInterceptor
  * @author: zhengkw
- * @description: 通过解析日志里的时间戳来过滤信息
+ * @description: 为event添加一个时间戳的header
+ * 时间戳取自于event里的信息
  * @date: 20/03/30下午 2:42
  * @version:1.0
  * @since: jdk 1.8
