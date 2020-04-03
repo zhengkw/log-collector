@@ -5,6 +5,7 @@ import org.apache.flume.Context;
 import org.apache.flume.Event;
 import org.apache.flume.interceptor.Interceptor;
 
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -31,11 +32,11 @@ public class SecondInterceptor implements Interceptor {
     public Event intercept(Event event) {
 
         byte[] body = event.getBody();
-        String strBody = body.toString().trim();
+        //用new的方式将byte数组转换成字符串，不指定chaset为默认UTF-8
+        String str = new String(body, Charset.forName("GBK"));
+        String strBody = str.trim();
         Map<String, String> headers = event.getHeaders();
         if (strBody.contains(startFlag)) {
-
-
             JSONObject jsonObject = JSONObject.parseObject(strBody);
             String ts = jsonObject.getString("t");
             headers.put("topic", "topic_start");
